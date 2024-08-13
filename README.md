@@ -2,7 +2,7 @@
 Status: Alpha, still deleting old/unused files from fork.
 
 ### Description:
-Wiseman-Timelords Hacks for CPU ONLY Stable Diffusion v1.10 Setups. I found Stable Diffusion Webui was created almost exclusively for nVidia users, and I say that because the thread usage was always balls low, making the issue worse was that multiple warnings pop up when using cpu. I think it was probably using 1 or something like 4, or maybe just half before, and there is no way to specify how many threads. People whom choose AMD hardware, probably have an AMD CPU with a high number of threads, and these were just not being put to use, and so, a pure quality of life mod, to save people time.
+Wiseman-Timelords Hacks for CPU ONLY Stable Diffusion v1.10 Setups. I found Stable Diffusion Webui was created almost exclusively for nVidia users, and I say that because the thread usage was always balls low, I think it was probably using, 1 or 4 or at best half, of the threads before, even after specifying `-use-cpu all`. Making the issue worse was that multiple warnings pop up when using cpu.  People whom choose AMD hardware, probably have an AMD CPU with a high number of threads, and these were just not being put to use, and so, a pure quality of life mod, to save people time.
 
 ## Features:
 - Work So Far...
