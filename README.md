@@ -2,7 +2,7 @@
 Status: Alpha, still deleting old/unused files from fork.
 
 ### Description:
-Wiseman-Timelords Hacks for CPU ONLY Stable Diffusion v1.10 Setups. I found Stable Diffusion Webui was created almost exclusively for nVidia users, and I say that because the thread usage was always balls low, I think it was probably using, 1 or 4 or at best half, of the threads before, even after specifying `-use-cpu all`. Making the issue worse was that multiple warnings pop up when using cpu.  People whom choose AMD hardware, probably have an AMD CPU with a high number of threads, and these were just not being put to use, and so, a pure quality of life mod, to save people time. Oh but really its a torch mod, just might have to do further work on Stable-Diffusion, albeit if I dont, and stable-diffusion is ok, then I will make it a torch mod, sry.
+Wiseman-Timelords Hacks for CPU ONLY Stable Diffusion v1.10 Setups. I found Stable Diffusion Webui was created almost exclusively for nVidia users, and I say that because the thread usage was always balls low, I think it was probably using, 1 or 4 or at best half, of the threads before, even after specifying `-use-cpu all`. Making the issue worse was that multiple warnings pop up when using cpu.  People whom choose AMD hardware, probably have an AMD CPU with a high number of threads, and these were just not being put to use, and so, a pure quality of life mod, to save people time. Oh but really its a torch mod, just might have to do further work on Stable-Diffusion, albeit if I dont, and stable-diffusion is ok, then I will make it a torch mod, and ups.
 
 ## Features:
 - Work So Far...
@@ -43,7 +43,7 @@ Model loaded in 2.8s (load weights from disk: 0.3s, create model: 0.8s, apply we
 ## Installation and Running
 This fork will be windows ONLY, as I cant test anything else. Instructions are currently...
 1. install "StableDiffusion-WebUi", and its requirements.txt, and ensure the models are in the models folder appropriately.
-2. run the batch to remove the non-cpu versions of torch and torchvision, and instead install torch cpu and torchvision cpu versions compatible with Stable diffusion 1.10
+2. run the batch to remove the non-cpu versions of torch and torchvision, and instead install compatible torch cpu and torchvision cpu versions; alternatively run `pip.exe uninstall torch torchvision -y`, then `pip.exe install torch==2.1.2+cpu torchvision==0.16.2+cpu torchaudio==2.1.2+cpu --extra-index-url`. 
 3. replace "YourDrive:\**ParentFolders**\Python310\Lib\site-packages\torch\cpu\amp\autocast_mode.py" with the "autocast_mode.py" supplied.
 4. run as normal, and ignore any additional errors, if errors when loading model, try load other, then one you wanted again, its a bit iffy sometimes, but you will notice, that the cpu usage is now blowing guages when you generate your images, this has to be progress worth sharing.
 
