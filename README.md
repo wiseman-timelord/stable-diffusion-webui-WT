@@ -44,7 +44,7 @@ Model loaded in 2.8s (load weights from disk: 0.3s, create model: 0.8s, apply we
 This fork will be windows ONLY, as I cant test anything else. Instructions are currently...
 1. install "StableDiffusion-WebUi", and its requirements.txt, and ensure the models are in the models folder appropriately.
 2. run the batch to remove the non-cpu versions of torch and torchvision, and instead install compatible torch cpu and torchvision cpu versions; alternatively run `pip.exe uninstall torch torchvision -y`, then `pip.exe install torch==2.1.2+cpu torchvision==0.16.2+cpu torchaudio==2.1.2+cpu --extra-index-url https://download.pytorch.org/whl/cpu`. 
-3. replace "YourDrive:\**ParentFolders**\Python310\Lib\site-packages\torch\cpu\amp\autocast_mode.py" with the "autocast_mode.py" supplied.
+3. replace, "...\Python310\Lib\site-packages\torch\cpu\amp\autocast_mode.py" with the "autocast_mode.py" and "...\StableDiffusion-Webui\modules\devices.py" with the "devices.py", supplied.
 4. run as normal, and ignore any additional errors, if errors when loading model, try load other, then one you wanted again, its a bit iffy sometimes, but you will notice, that the cpu usage is now blowing guages when you generate your images, this has to be progress worth sharing.
 
 ### Notes:
