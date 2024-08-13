@@ -48,7 +48,7 @@ This fork will be windows ONLY, as I cant test anything else. Instructions are c
 4. run as normal, and ignore any additional errors, if errors when loading model, try load other, then one you wanted again, its a bit iffy sometimes, but you will notice, that the cpu usage is now blowing guages when you generate your images, this has to be progress worth sharing.
 
 ### Notes:
-- If you are an AI programmer, backup the py file, and provide it to GPT, ask for 1 cpu optimization at a time, and test, fall back to working versions, start simple.
+- If you are an AI programmer, backup the py files provided, and feed them into GPT, ask for 1 improvement/optimization at a time towards your specific processor, and then test, fall back to working versions, start simple.
 
 ## Credits
 - Stable Diffusion - https://github.com/Stability-AI/stablediffusion, https://github.com/CompVis/taming-transformers, https://github.com/mcmonkey4eva/sd3-ref
