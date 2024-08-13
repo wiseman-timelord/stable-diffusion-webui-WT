@@ -9,7 +9,7 @@ Wiseman-Timelords Hacks for CPU ONLY Stable Diffusion v1.10 Setups. I found Stab
 1. Stopped some Cuda warnings by streamlining "devices.py".
 2. Enabled multi-core for torch, it will use 85% of available threads, set in global at top of "autocast_mode.py".
 - Work Intended...
-1. Avx2 and/or Aocl, specific code.
+1. Avx2 and/or Aocl, specific code, try and get it working fast as possible for Avx2 based processors.
 2. User friendly installer/patcher, that, ensures torch/torchvision cpu are installed, then searches for files in possibly locations and patches.
 
 ### Preview:
