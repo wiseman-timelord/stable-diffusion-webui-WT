@@ -2,7 +2,7 @@
 Status: Alpha, still deleting old/unused files from fork.
 
 ### Description:
-Wiseman-Timelords Hacks for CPU ONLY Stable Diffusion v1.10 Setups. I found Stable Diffusion Webui was created almost exclusively for nVidia users, and I say that because the thread usage was always balls low, I think it was probably using, 1 or 4 or at best half, of the threads before, even after specifying `-use-cpu all`. Making the issue worse was that multiple warnings pop up when using cpu.  People whom choose AMD hardware, probably have an AMD CPU with a high number of threads, and these were just not being put to use, and so, a pure quality of life mod, to save people time. Oh but really its a torch mod so far, but I am guessing in more recent versions of torch they have fixed this or something? So it fixes v2.1.2. of torch, used for sd-webui version ~1.10 (2024\08\13). If you are an AI programmer, backup the py file, and provide it to GPT, ask for 1 cpu optimization at a time, and test, fall back to working versions, start simple.
+Wiseman-Timelords Hacks for CPU ONLY Stable Diffusion v1.10 Setups. I found Stable Diffusion Webui was created almost exclusively for nVidia users, and I say that because the thread usage was always balls low, I think it was probably using, 1 or 4 or at best half, of the threads before, even after specifying `-use-cpu all`. Making the issue worse was that multiple warnings pop up when using cpu.  People whom choose AMD hardware, probably have an AMD CPU with a high number of threads, and these were just not being put to use, and so, a pure quality of life mod, to save people time. Oh but really its a torch mod so far, but I am guessing in more recent versions of torch they have fixed this or something? So it fixes v2.1.2. of torch, used for sd-webui version ~1.10 (2024\08\13).
 
 ## Features:
 - Work So Far...
@@ -46,6 +46,9 @@ This fork will be windows ONLY, as I cant test anything else. Instructions are c
 2. run the batch to remove the non-cpu versions of torch and torchvision, and instead install compatible torch cpu and torchvision cpu versions; alternatively run `pip.exe uninstall torch torchvision -y`, then `pip.exe install torch==2.1.2+cpu torchvision==0.16.2+cpu torchaudio==2.1.2+cpu --extra-index-url https://download.pytorch.org/whl/cpu`. 
 3. replace "YourDrive:\**ParentFolders**\Python310\Lib\site-packages\torch\cpu\amp\autocast_mode.py" with the "autocast_mode.py" supplied.
 4. run as normal, and ignore any additional errors, if errors when loading model, try load other, then one you wanted again, its a bit iffy sometimes, but you will notice, that the cpu usage is now blowing guages when you generate your images, this has to be progress worth sharing.
+
+### Notes:
+- If you are an AI programmer, backup the py file, and provide it to GPT, ask for 1 cpu optimization at a time, and test, fall back to working versions, start simple.
 
 ## Credits
 - Stable Diffusion - https://github.com/Stability-AI/stablediffusion, https://github.com/CompVis/taming-transformers, https://github.com/mcmonkey4eva/sd3-ref
