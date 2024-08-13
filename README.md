@@ -49,6 +49,7 @@ This fork will be windows ONLY, as I cant test anything else. Instructions are c
 
 ### Notes:
 - If you are an AI programmer, backup the py files provided, and feed them into GPT, ask for 1 improvement/optimization at a time towards your specific processor, and then test, fall back to working versions, start simple.
+- Torch could theoretically be made opencl/vulkan, and if I can use vulkan for torch, then it would be possible to use vulkan for amd and nvidia, and streamlines the scripts. Just have options Cpu and Vulkan, got to test it first.
 
 ## Credits
 - Stable Diffusion - https://github.com/Stability-AI/stablediffusion, https://github.com/CompVis/taming-transformers, https://github.com/mcmonkey4eva/sd3-ref
