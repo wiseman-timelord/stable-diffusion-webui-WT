@@ -38,8 +38,35 @@ def has_mps() -> bool:
     else:
         return mac_specific.has_mps
 
-# Removed the CUDA-related functions and checks
+
+def cuda_no_autocast(device_id=None) -> bool:
+    if device_id is None:
+        device_id = get_cuda_device_id()
+    return (
+        torch.cuda.get_device_capability(device_id) == (7, 5)
+        and torch.cuda.get_device_name(device_id).startswith("NVIDIA GeForce GTX 16")
+    )
+
+
+def get_cuda_device_id():
+    return (
+        int(shared.cmd_opts.device_id)
+        if shared.cmd_opts.device_id is not None and shared.cmd_opts.device_id.isdigit()
+        else 0
+    ) or torch.cuda.current_device()
+
+
+def get_cuda_device_string():
+    if shared.cmd_opts.device_id is not None:
+        return f"cuda:{shared.cmd_opts.device_id}"
+
+    return "cuda"
+
+
 def get_optimal_device_name():
+    if torch.cuda.is_available():
+        return get_cuda_device_string()
+
     if has_mps():
         return "mps"
 
@@ -49,7 +76,7 @@ def get_optimal_device_name():
     if npu_specific.has_npu:
         return npu_specific.get_npu_device_string()
 
-    return "cpu"  # Default to CPU
+    return "cpu"
 
 
 def get_optimal_device():
@@ -64,7 +91,12 @@ def get_device_for(task):
 
 
 def torch_gc():
-    # Only keep CPU and MPS (for macOS) garbage collection
+
+    if torch.cuda.is_available():
+        with torch.cuda.device(get_cuda_device_string()):
+            torch.cuda.empty_cache()
+            torch.cuda.ipc_collect()
+
     if has_mps():
         mac_specific.torch_mps_gc()
 
@@ -77,19 +109,29 @@ def torch_gc():
 
 
 def torch_npu_set_device():
+    # Work around due to bug in torch_npu, revert me after fixed, @see https://gitee.com/ascend/pytorch/issues/I8KECW?from=project-issue
     if npu_specific.has_npu:
         torch.npu.set_device(0)
 
 
 def enable_tf32():
-    # Removed the CUDA-specific operations since they are not relevant for CPU-only mode
-    pass
+    if torch.cuda.is_available():
+
+        # enabling benchmark option seems to enable a range of cards to do fp16 when they otherwise can't
+        # see https://github.com/AUTOMATIC1111/stable-diffusion-webui/pull/4407
+        if cuda_no_autocast():
+            torch.backends.cudnn.benchmark = True
+
+        torch.backends.cuda.matmul.allow_tf32 = True
+        torch.backends.cudnn.allow_tf32 = True
 
 
 errors.run(enable_tf32, "Enabling TF32")
 
 cpu: torch.device = torch.device("cpu")
 fp8: bool = False
+# Force fp16 for all models in inference. No casting during inference.
+# This flag is controlled by "--precision half" command line arg.
 force_fp16: bool = False
 device: torch.device = None
 device_interrogate: torch.device = None
@@ -186,9 +228,11 @@ def autocast(disable=False):
         return contextlib.nullcontext()
 
     if force_fp16:
+        # No casting during inference if force_fp16 is enabled.
+        # All tensor dtype conversion happens before inference.
         return contextlib.nullcontext()
 
-    if fp8 and device == cpu:
+    if fp8 and device==cpu:
         return torch.autocast("cpu", dtype=torch.bfloat16, enabled=True)
 
     if fp8 and dtype_inference == torch.float32:
@@ -197,14 +241,14 @@ def autocast(disable=False):
     if dtype == torch.float32 or dtype_inference == torch.float32:
         return contextlib.nullcontext()
 
-    if has_xpu() or has_mps():
+    if has_xpu() or has_mps() or cuda_no_autocast():
         return manual_cast(dtype)
 
-    return torch.autocast("cpu")  # Default to CPU autocast
+    return torch.autocast("cuda")
 
 
 def without_autocast(disable=False):
-    return contextlib.nullcontext()
+    return torch.autocast("cuda", enabled=False) if torch.is_autocast_enabled() and not disable else contextlib.nullcontext()
 
 
 class NansException(Exception):
@@ -222,7 +266,7 @@ def test_for_nans(x, where):
         message = "A tensor with NaNs was produced in Unet."
 
         if not shared.cmd_opts.no_half:
-            message += " This could be either because there's not enough precision to represent the picture, or because your CPU does not support half type. Try setting the \"Upcast cross attention layer to float32\" option in Settings > Stable Diffusion or using the --no-half commandline argument to fix this."
+            message += " This could be either because there's not enough precision to represent the picture, or because your video card does not support half type. Try setting the \"Upcast cross attention layer to float32\" option in Settings > Stable Diffusion or using the --no-half commandline argument to fix this."
 
     elif where == "vae":
         message = "A tensor with NaNs was produced in VAE."
