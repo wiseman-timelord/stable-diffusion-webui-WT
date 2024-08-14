@@ -11,6 +11,7 @@ Wiseman-Timelords Hacks for CPU ONLY Stable Diffusion v1.10 Setups. I found Stab
 3. figured out the argument `COMMANDLINE_ARGS=--use-cpu all --no-half --skip-torch-cuda-test`.
 - Work Intended...
 1. batch "install-torch-aocl.bat" it will remove, torch, torchvision, torchaudio, then build/install pytorch, torchvision, torchaudio for Avx2 and AOCL. This will be for AVX2 with AOCL installed ONLY.
+2. If I can get the aocl batch to work, then I will next be trying to get the vulkan or opencl one working, but, I think it would require diff program code, or the cuda re-implementing and modifying a little. no doubt there will be some issue.
 
 ### Preview:
 - No issues there, and look it shows how many threads its using...
