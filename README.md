@@ -6,9 +6,9 @@ Wiseman-Timelords Hacks for CPU ONLY Stable Diffusion v1.10 Setups. I found Stab
 
 ## Features:
 - Work So Far...
-1. Stopped some Cuda warnings by streamlining "devices.py".
-2. Enabled multi-core for torch, it will use 85% of available threads, set in global at top of "autocast_mode.py".
-3. batch to remove, torch, torchvision, torchaudio, then installs, torch+cpu, torchvision+cpu, torchaudio+cpu. 
+1. Enabled multi-core for torch, it will use 85% of available threads, set in global at top of "devices.py".
+2. batch to remove, torch, torchvision, torchaudio, then installs, torch+cpu, torchvision+cpu, torchaudio+cpu.
+3. figured out the argument `COMMANDLINE_ARGS=--use-cpu all --no-half --skip-torch-cuda-test`.
 - Work Intended...
 1. Avx2 and/or Aocl, specific code, try and get it working fast as possible for Avx2 based processors.
 2. User friendly installer/patcher, that, ensures torch/torchvision cpu are installed, then searches for files in possibly locations and patches.
@@ -45,21 +45,9 @@ Model loaded in 2.8s (load weights from disk: 0.3s, create model: 0.8s, apply we
 This fork will be windows ONLY, as I cant test anything else. Instructions are currently...
 1. install "StableDiffusion-WebUi", and its requirements.txt, and ensure the models are in the models folder appropriately.
 2. run the batch `install-torchcpu-webui.bat` to remove the non-cpu versions of torch and torchvision, and instead install compatible torch cpu and torchvision cpu versions; alternatively run `pip.exe uninstall torch torchvision torchaudio -y`, then `pip.exe install torch==2.1.2+cpu torchvision==0.16.2+cpu torchaudio==2.1.2+cpu --extra-index-url https://download.pytorch.org/whl/cpu`. 
-3. replace, "...\Python310\Lib\site-packages\torch\cpu\amp\autocast_mode.py" with the "autocast_mode.py" and "...\StableDiffusion-Webui\modules\devices.py" with the "devices.py", supplied.
-4. run as normal, and ignore any additional errors, if errors when loading model, try load other, then one you wanted again, its a bit iffy sometimes, but you will notice, that the cpu usage is now blowing guages when you generate your images, this has to be progress worth sharing.
-- Here is an example `webui-user.bat`...
-```
-@echo off
-
-set OMP_NUM_THREADS=20
-set PYTORCH_NO_CUDA=1
-set PYTHON=C:\Progra~1\Python310\python.exe
-set GIT=C:\Progra~1\Git\bin\git.exe
-set VENV_DIR=
-set COMMANDLINE_ARGS=--use-cpu all --no-half --skip-torch-cuda-test --api --port 7860 
-
-call webui.bat
-```
+3. replace "...\StableDiffusion-Webui\modules\devices.py" with the "devices.py", supplied.
+4. The arguments in "webui-user.bat" i suggest `COMMANDLINE_ARGS=--use-cpu all --no-half --skip-torch-cuda-test`.
+5. run as normal, and ignore any additional errors, if errors when loading model, try load other, then one you wanted again, its a bit iffy sometimes, but you will notice, that the cpu usage is now blowing guages when you generate your images, this has to be progress worth sharing.
 
 ### Notes:
 - If you are an AI programmer, backup the py files provided, and feed them into GPT, ask for 1 improvement/optimization at a time towards your specific processor, and then test, fall back to working versions, start simple.
