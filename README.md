@@ -46,7 +46,7 @@ This fork will be windows ONLY, as I cant test anything else. Instructions are c
 2. run the batch `install-torch-cpu.bat` to remove the non-cpu versions of torch and torchvision, and instead install compatible torch cpu and torchvision cpu versions; alternatively run `pip.exe uninstall torch torchvision torchaudio -y`, then `pip.exe install torch==2.1.2+cpu torchvision==0.16.2+cpu torchaudio==2.1.2+cpu --extra-index-url https://download.pytorch.org/whl/cpu`. 
 3. replace "...\StableDiffusion-Webui\modules\devices.py" with the "devices.py", supplied.
 4. The arguments in "webui-user.bat" i suggest `COMMANDLINE_ARGS=--use-cpu all --no-half --skip-torch-cuda-test`. In short, use all cpus, no half precision (because cpu), no cuda.
-5. run as normal, and ignore any additional errors, if errors when loading model, try load other, then one you wanted again, its a bit iffy sometimes, but you will notice, that the cpu usage is now blowing guages when you generate your images, this has to be progress worth sharing.
+5. run as normal, and ignore any additional errors printed by the gradio interface, it just does that, but you will notice, that the cpu usage is now blowing guages when you generate your images, so it IS using most of the threads now.
 
 ### Notes:
 - If you are an AI programmer, backup the py files provided, and feed them into GPT, ask for 1 improvement/optimization at a time towards your specific processor, and then test, fall back to working versions, start simple.
