@@ -7,11 +7,10 @@ Wiseman-Timelords Hacks for CPU ONLY Stable Diffusion v1.10 Setups. I found Stab
 ## Features:
 - Work So Far...
 1. Enabled multi-core for torch, it will use 85% of available threads, set in global at top of "devices.py".
-2. batch to remove, torch, torchvision, torchaudio, then installs, torch+cpu, torchvision+cpu, torchaudio+cpu.
+2. batch "install-torch-cpu.bat" to remove, torch, torchvision, torchaudio, then installs, torch+cpu, torchvision+cpu, torchaudio+cpu. This is for any CPU.
 3. figured out the argument `COMMANDLINE_ARGS=--use-cpu all --no-half --skip-torch-cuda-test`.
 - Work Intended...
-1. It will next be building the version of pytorch for Avx2 and AOCL, so v1.10.0.2 will be AVX2 with AOCL installed ONLY.
-3. Potentially Vulkan build of pytorch, but would that then be re-implementing the devices, and hardcoding/replacing the cuda code with vulkan, and not having cpu. 
+1. batch "install-torch-aocl.bat" it will remove, torch, torchvision, torchaudio, then build/install pytorch, torchvision, torchaudio for Avx2 and AOCL. This will be for AVX2 with AOCL installed ONLY.
 
 ### Preview:
 - No issues there, and look it shows how many threads its using...
