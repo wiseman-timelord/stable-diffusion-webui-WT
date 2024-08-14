@@ -2,7 +2,7 @@
 Status: Beta; The hacks work, but are experimental and quick-fixes.
 
 ### Description:
-Wiseman-Timelords Hacks for CPU ONLY Stable Diffusion v1.10 Setups. I found Stable Diffusion Webui was created almost exclusively for nVidia users, and I say that because the thread usage was always balls low, going by the default of llama.cpp, this is probably 4 threads, even after specifying `-use-cpu all`, possibly that is ALL cpus, NOT all threads. People whom choose AMD hardware, probably have an AMD CPU with a high number of threads, and these were just not being put to use, and so, a pure quality of life mod, to save people time. So it fixes some things for sd-webui version ~1.10 (2024\08\13) relating to non-cuda installs.
+Wiseman-Timelords Hacks for CPU ONLY Stable Diffusion v1.10 Setups. I found Stable Diffusion Webui was created almost exclusively for nVidia users, and I say that because the thread usage was always balls low, going by the default of llama.cpp, this is probably 4 threads, even after specifying `-use-cpu all`, possibly that is ALL cpus, NOT all threads. People whom choose AMD hardware, probably have an AMD CPU with a high number of threads, and these were just not being put to use, and so, a pure quality of life mod, to save people time. So it fixes/optimizes some things for sd-webui version ~1.10 (2024\08\13) relating to non-cuda installs.
 
 ## Features:
 - Work So Far...
