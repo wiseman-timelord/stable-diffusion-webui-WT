@@ -1,5 +1,5 @@
-# Stable Diffusion web UI - Wiseman-Timelord
-Status: Beta; The hacks work, but are experimental and quick-fixes.
+# Stable Diffusion WebUI - Wiseman-Timelord
+Status: Release. The hacks work, but are quick-fixes. Other urgent project, work is paused, will return to project.
 
 ### Description:
 Wiseman-Timelords Hacks for CPU ONLY Stable Diffusion v1.10 Setups. I found Stable Diffusion Webui was created almost exclusively for nVidia users, and I say that because the thread usage was always balls low, going by the default of llama.cpp, this is probably 4 threads, even after specifying `-use-cpu all`, possibly that is ALL cpus, NOT all threads. People whom choose AMD hardware, probably have an AMD CPU with a high number of threads, and these were just not being put to use, and so, a pure quality of life mod, to save people time. So it fixes/optimizes some things for sd-webui version ~1.10 (2024\08\13) relating to non-cuda installs.
@@ -50,6 +50,7 @@ This fork will be windows ONLY, as I cant test anything else. Instructions are c
 5. run as normal, and ignore any additional errors printed by the gradio interface, it just does that, but you will notice, that the cpu usage is now blowing guages when you generate your images, so it IS using by default 85% of the threads now.
 
 ### Notes:
+- Aocl Optimizatin is almost complete in version i have `install-torch-aocl.bat`, but there was complication....
 - If you are an AI programmer, backup the py files provided, and feed them into GPT, ask for 1 improvement/optimization at a time towards your specific processor, and then test, fall back to working versions, start simple.
 - Torch could theoretically be made opencl/vulkan, and if I can use vulkan for torch, then it would be possible to use vulkan for amd and nvidia, and streamlines the scripts. Just have options Cpu and Vulkan, got to test it first.
 
