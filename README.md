@@ -1,15 +1,6 @@
 # Stable Diffusion WebUI - Wiseman-Timelord
 Status: Release. The hacks work, but are quick-fixes. Other urgent project, work is paused, will return to project.
 
-## New Plan:
-- GPT Said the way to fix the ...
-```
-Use WSL2 for Building:
-
-Consider switching the build process to WSL2, where the Linux environment is better supported for compiling these libraries.
-The existing batch script can be modified to ensure that the build is conducted within the WSL2 environment, leveraging the Linux toolchain.
-```
-
 ### Description:
 Assuming that `-use-cpu all` is ALL cpus NOT all threads, and looking at thread usage, the AMD Zen# CPU with a higher number of threads isnt being put to work, when the user has a non-cuda setup. So, its currently a fix to enable 85% of processor threads in torch, and its programmed for sd-webui version ~1.10 (2024\08\13), and   has progressed. It is intentded So it fixes/optimizes some things for sd-webui version ~1.10 (2024\08\13) relating to non-cuda installs.
 
@@ -20,7 +11,7 @@ Assuming that `-use-cpu all` is ALL cpus NOT all threads, and looking at thread 
 3. figured out the argument `COMMANDLINE_ARGS=--use-cpu all --no-half --skip-torch-cuda-test`.
 - Work Intended...
 1. Other project must complete, where I will upload script to put in same dir as an ubuntu model, and it will install the specified model into wsl2.
-2. Must re-program script in wsl2, to be able to compile required libraries, and utilize amd_gpu, if thats possible.
+2. Must re-program script in wsl2, to be able to compile required libraries, and utilize amd_gpu etc, if thats possible, its supposedly the simple method of doing things, without spending months doing it.
 3. batch "install-torch-aocl.bat" it will remove, torch, torchvision, torchaudio, then build/install pytorch, torchvision, torchaudio for Avx2 and AOCL. This will be for AVX2 with AOCL installed ONLY.
 4. If I can get the aocl batch to work, then I will next be trying to get the vulkan or opencl one working, but, I think it would require diff program code, or the cuda re-implementing and modifying a little. no doubt there will be some issue.
 
