@@ -1,8 +1,17 @@
 # Stable Diffusion WebUI - Wiseman-Timelord
 Status: Release. The hacks work, but are quick-fixes. Other urgent project, work is paused, will return to project.
 
+## New Plan:
+- GPT Said the way to fix the ...
+```
+Use WSL2 for Building:
+
+Consider switching the build process to WSL2, where the Linux environment is better supported for compiling these libraries.
+The existing batch script can be modified to ensure that the build is conducted within the WSL2 environment, leveraging the Linux toolchain.
+```
+
 ### Description:
-Wiseman-Timelords Hacks for CPU ONLY Stable Diffusion v1.10 Setups. I found Stable Diffusion Webui was created almost exclusively for nVidia users, and I say that because the thread usage was always balls low, going by the default of llama.cpp, this is probably 4 threads, even after specifying `-use-cpu all`, possibly that is ALL cpus, NOT all threads. People whom choose AMD hardware, probably have an AMD CPU with a high number of threads, and these were just not being put to use, and so, a pure quality of life mod, to save people time. So it fixes/optimizes some things for sd-webui version ~1.10 (2024\08\13) relating to non-cuda installs.
+Assuming that `-use-cpu all` is ALL cpus NOT all threads, and looking at thread usage, the AMD Zen# CPU with a higher number of threads isnt being put to work, when the user has a non-cuda setup. So, its currently a fix to enable 85% of processor threads in torch, and its programmed for sd-webui version ~1.10 (2024\08\13), and   has progressed. It is intentded So it fixes/optimizes some things for sd-webui version ~1.10 (2024\08\13) relating to non-cuda installs.
 
 ## Features:
 - Work So Far...
@@ -12,6 +21,10 @@ Wiseman-Timelords Hacks for CPU ONLY Stable Diffusion v1.10 Setups. I found Stab
 - Work Intended...
 1. batch "install-torch-aocl.bat" it will remove, torch, torchvision, torchaudio, then build/install pytorch, torchvision, torchaudio for Avx2 and AOCL. This will be for AVX2 with AOCL installed ONLY.
 2. If I can get the aocl batch to work, then I will next be trying to get the vulkan or opencl one working, but, I think it would require diff program code, or the cuda re-implementing and modifying a little. no doubt there will be some issue.
+
+### Versions:
+The details of the releases...
+- v1.10.0.1 - It will work on Any CPU, no specific Amd or Aocl code, and its non-wsl based. 
 
 ### Preview:
 - No issues there, and look it shows how many threads its using...
