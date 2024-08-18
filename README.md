@@ -1,5 +1,5 @@
 # Stable Diffusion WebUI - Wiseman-Timelord
-Status: Release. The hacks work, but are quick-fixes, or demonstrations of improvements.
+Status: Release. The hacks work, but are quick-fixes, or demonstrations of improvements. Project restart and re-clone will happen at some point, this will enable push, as now there is separate project Mantella-Local-Launcher in my repositories, that said, heres the current state...
 
 ### Description:
 Assuming that `-use-cpu all` is ALL cpus NOT all threads, and looking at thread usage, the AMD Zen# CPU with a higher number of threads isnt being put to work, when the user has a non-cuda setup. So, its currently a fix to enable 85% of processor threads in torch, and its programmed for sd-webui version ~1.10 (2024\08\13), and   has progressed. It is intentded So it fixes/optimizes some things for sd-webui version ~1.10 (2024\08\13) relating to non-cuda installs.
