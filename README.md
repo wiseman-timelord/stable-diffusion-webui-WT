@@ -1,12 +1,12 @@
 # Stable Diffusion WebUI - Wiseman-Timelord
-Status: Release. The hacks work, but are quick-fixes. Other urgent project, work is paused, will return to project.
+Status: Release. The hacks work, but are quick-fixes, or demonstrations of improvements.
 
 ### Description:
 Assuming that `-use-cpu all` is ALL cpus NOT all threads, and looking at thread usage, the AMD Zen# CPU with a higher number of threads isnt being put to work, when the user has a non-cuda setup. So, its currently a fix to enable 85% of processor threads in torch, and its programmed for sd-webui version ~1.10 (2024\08\13), and   has progressed. It is intentded So it fixes/optimizes some things for sd-webui version ~1.10 (2024\08\13) relating to non-cuda installs.
 
 ## Features:
 - Work So Far...
-1. Enabled multi-core for torch, it will use 85% of available threads, set in global at top of "devices.py".
+1. Enabled multi-core for torch, it will use 85% of available threads, set in global at top of "devices.py". This could be added to main branch, as its in the python script, that has been streamlined.
 2. batch "install-torch-cpu.bat" to remove, torch, torchvision, torchaudio, then installs, torch+cpu, torchvision+cpu, torchaudio+cpu. This is for any CPU.
 3. figured out the argument `COMMANDLINE_ARGS=--use-cpu all --no-half --skip-torch-cuda-test`.
 - Work Intended...
